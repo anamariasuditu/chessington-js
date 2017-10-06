@@ -1,17 +1,15 @@
 import 'chai/register-should';
 import Pawn from '../../../src/engine/pieces/pawn';
-import Rook from '../../../src/engine/pieces/rook';
 import Board from '../../../src/engine/board';
 import Player from '../../../src/engine/player';
 import Square from '../../../src/engine/square';
 
 describe('Pawn', () => {
 
+    let board;
+    beforeEach(() => board = new Board());
 
-
-        let board;
-        beforeEach(() => board = new Board());
-describe('white pawns', () => {
+    describe('white pawns', () => {
         
         it('can only move one square up if they have already moved', () => {
             const pawn = new Pawn(Player.WHITE);
