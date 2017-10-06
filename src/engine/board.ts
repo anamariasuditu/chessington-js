@@ -12,6 +12,14 @@ export default class Board {
         this.board = this.createBoard();
     }
 
+    createBoard() {
+        const board = new Array(GameSettings.BOARD_SIZE);
+        for (let i = 0; i < board.length; i++) {
+            board[i] = new Array(GameSettings.BOARD_SIZE);
+        }
+        return board;
+    }
+
     public setPiece(square: Square, piece: Piece | undefined) {
         this.board[square.row][square.col] = piece;
     }
@@ -32,19 +40,11 @@ export default class Board {
     }
 
     public movePiece(fromSquare: Square, toSquare: Square) {
-        const movingPiece = this.getPiece(fromSquare);        
+        const movingPiece = this.getPiece(fromSquare);
         if (!!movingPiece && movingPiece.player === this.currentPlayer) {
             this.setPiece(toSquare, movingPiece);
             this.setPiece(fromSquare, undefined);
             this.currentPlayer = (this.currentPlayer === Player.WHITE ? Player.BLACK : Player.WHITE);
         }
-    }
-
-    private createBoard() {
-        const board = new Array(GameSettings.BOARD_SIZE);
-        for (let i = 0; i < board.length; i++) {
-            board[i] = new Array(GameSettings.BOARD_SIZE);
-        }
-        return board;
     }
 }
