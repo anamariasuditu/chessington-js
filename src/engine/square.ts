@@ -18,4 +18,7 @@ export default class Square {
     public toString() {
         return `Row ${this.row}, Col ${this.col}`;
     }
+    public isValidSquare(row: number, col: number){
+        return row >= 0 && row < 8 && col >= 0 && col < 8;
+    }
 }

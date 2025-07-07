@@ -11,18 +11,23 @@ export default class Rook extends Piece {
     public getAvailableMoves(board: Board) {
         let moves = []
         let currentSquare = board.findPiece(this);
+        let nextSquare;
+        const directions = [
+        {row: 1, col: 0}, //sus
+        {row: -1, col: 0}, //jos
+        {row: 0, col: -1}, //stanga
+        {row: 0, col: 1}, //dreapta
+        ];
 
-        //move vertically
-        for(let row = 0; row < 8; row++){
-            if(currentSquare.row!= row){
-                moves.push(Square.at(row, currentSquare.col));
-            }
-        }
+        for(const direction of directions){
+            let nextRow = currentSquare.row + direction.row;
+            let nextCol = currentSquare.col + direction.col;
 
-        //move horizontally
-        for(let col = 0; col < 8; col++){
-            if(currentSquare.col!= col){
-                moves.push(Square.at(currentSquare.row, col));
+            nextSquare = Square.at(nextRow, nextCol);
+            while(nextSquare.isValidSquare(nextRow,nextCol)){
+                moves.push(Square.at(nextRow,nextCol));
+                nextRow += direction.row ;
+                nextCol += direction.col;
             }
         }
 
