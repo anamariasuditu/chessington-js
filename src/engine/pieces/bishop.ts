@@ -9,7 +9,27 @@ export default class Bishop extends Piece {
     }
 
     public getAvailableMoves(board: Board) {
+        let moves = []
+        let currentSquare = board.findPiece(this);
+        let nextSquare;
+        const directions = [
+            {row: 1, col: 1}, //sus-dreapta
+            {row: 1, col: -1}, //sus-stanga
+            {row: -1, col: 1}, // jos-dreapta
+            {row: -1, col: -1}, //jos-stanga
+        ];
 
-        return new Array(0);
+        for(const direction of directions){
+            let nextRow = currentSquare.row + direction.row;
+            let nextCol = currentSquare.col + direction.col;
+
+            nextSquare = Square.at(nextRow, nextCol);
+            while(nextSquare.isValidSquare(nextRow,nextCol)){
+                moves.push(Square.at(nextRow,nextCol));
+                nextRow += direction.row ;
+                nextCol += direction.col;
+            }
+        }
+        return moves;
     }
 }
