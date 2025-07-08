@@ -30,7 +30,6 @@ export default class Knight extends Piece {
             nextSquare = Square.at(nextRow, nextCol);
             if(nextSquare.isValidSquare(nextRow,nextCol)){
                 moves.push(Square.at(nextRow,nextCol));
-                console.log(Square.at(nextRow,nextCol));
             }
         }
 
