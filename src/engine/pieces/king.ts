@@ -29,7 +29,17 @@ export default class King extends Piece {
 
             nextSquare = Square.at(nextRow, nextCol);
             if(nextSquare.isValidSquare(nextRow,nextCol)){
-                moves.push(Square.at(nextRow,nextCol));
+                nextSquare = Square.at(nextRow, nextCol);
+                let piece = board.getPiece(nextSquare);
+
+                if(!piece){
+                    moves.push(Square.at(nextRow,nextCol));
+                }
+                else if(piece.player != this.player){
+                    if(!(piece instanceof King)){
+                        moves.push(Square.at(nextRow,nextCol));
+                    }
+                }
             }
         }
 
