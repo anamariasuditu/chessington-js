@@ -28,10 +28,16 @@ export default class Queen extends Piece {
             let nextCol = currentSquare.col + direction.col;
 
             nextSquare = Square.at(nextRow, nextCol);
+
             while(nextSquare.isValidSquare(nextRow,nextCol)){
-                moves.push(Square.at(nextRow,nextCol));
-                nextRow += direction.row ;
-                nextCol += direction.col;
+                nextSquare = Square.at(nextRow, nextCol);
+                let piece = board.getPiece(nextSquare);
+                if(!piece){
+                    moves.push(Square.at(nextRow,nextCol));
+                    nextRow += direction.row ;
+                    nextCol += direction.col;
+                } else break;
+
             }
         }
 
