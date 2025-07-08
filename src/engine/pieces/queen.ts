@@ -2,6 +2,7 @@ import Piece from './piece';
 import Player from '../player';
 import Board from '../board';
 import Square from "../square";
+import King from "./king";
 
 export default class Queen extends Piece {
     public constructor(player: Player) {
@@ -32,12 +33,19 @@ export default class Queen extends Piece {
             while(nextSquare.isValidSquare(nextRow,nextCol)){
                 nextSquare = Square.at(nextRow, nextCol);
                 let piece = board.getPiece(nextSquare);
+
                 if(!piece){
                     moves.push(Square.at(nextRow,nextCol));
-                    nextRow += direction.row ;
-                    nextCol += direction.col;
+                }
+                else if(piece.player != this.player){
+                    if(!(piece instanceof King)){
+                        moves.push(Square.at(nextRow,nextCol));
+                        break;
+                    }
                 } else break;
 
+                nextRow += direction.row ;
+                nextCol += direction.col;
             }
         }
 
