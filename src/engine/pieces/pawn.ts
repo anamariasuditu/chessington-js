@@ -124,7 +124,6 @@ export default class Pawn extends Piece {
         //         }
         //     }
         // }
-        console.log(moves);
         return moves;
     }
 }
